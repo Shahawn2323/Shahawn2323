@@ -1,0 +1,101 @@
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectTrigger, SelectContent, SelectItem } from "@/components/ui/select";
+
+export default function LandingPage() {
+  const [topic, setTopic] = useState<string>("Life Insurance – Sharia-compliant");
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6">
+      {/* Hero Section */}
+      <Card className="w-full max-w-3xl shadow-2xl rounded-2xl mb-8">
+        <CardContent className="p-8 text-center">
+          <h1 className="text-3xl font-bold mb-2">
+            🌙 Protect Your Family with Faith-Aligned Insurance Solutions
+          </h1>
+          <p className="text-gray-600 mb-4">
+            Protect your family’s future with <b>Shahwali Hotaki</b> (Licensed Broker, NPN 21422353) —
+            offering <b>Sharia-compliant life insurance (takaful)</b> and conventional coverage.
+          </p>
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg rounded-2xl shadow-md">
+            <a href="https://ikhlasinsurance.com/team/shahwali-hotaki/?utm_source=facebook&utm_medium=cpc&utm_campaign=insurance&utm_content=landingpage" target="_blank">
+              Book a Free Consultation
+            </a>
+          </Button>
+        </CardContent>
+      </Card>
+
+      {/* Benefits Section */}
+      <div className="grid md:grid-cols-2 gap-6 w-full max-w-4xl mb-8">
+        {[
+          { icon: "🕌", text: "Sharia-compliant options: No riba, gharar, or maisir" },
+          { icon: "🛡️", text: "Affordable life & health coverage tailored to your budget" },
+          { icon: "👨‍👩‍👧", text: "Family-focused protection: Mortgage, burial, debt, or legacy planning" },
+          { icon: "🧾", text: "Marketplace & Medicare support: CA, GA, VA, IL" },
+        ].map((item, idx) => (
+          <Card key={idx} className="shadow-md rounded-2xl">
+            <CardContent className="p-4 flex items-center space-x-3">
+              <span className="text-2xl">{item.icon}</span>
+              <p className="text-gray-700">{item.text}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Contact Form (Netlify Forms enabled) */}
+      <Card className="w-full max-w-2xl shadow-2xl rounded-2xl">
+        <CardContent className="p-8">
+          <h2 className="text-2xl font-semibold mb-4 text-center">✍️ Quick Contact Form</h2>
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            className="space-y-4"
+          >
+            {/* Netlify form name */}
+            <input type="hidden" name="form-name" value="contact" />
+            {/* Honeypot field */}
+            <input type="text" name="bot-field" className="hidden" aria-hidden="true" />
+
+            <Input name="name" placeholder="Full Name" required />
+            <Input name="phone" placeholder="Phone Number" required />
+            <Input name="email" placeholder="Email Address" type="email" required />
+            <Input name="state" placeholder="State of Residence" required />
+
+            {/* Topic Select (controlled) */}
+            <Select value={topic} onValueChange={setTopic}>
+              <SelectTrigger className="w-full">{topic || "Select a Topic"}</SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Life Insurance – Sharia-compliant">Life Insurance – Sharia-compliant</SelectItem>
+                <SelectItem value="Life Insurance – Conventional">Life Insurance – Conventional</SelectItem>
+                <SelectItem value="ACA / Marketplace (CA, GA, VA, IL)">ACA / Marketplace (CA, GA, VA, IL)</SelectItem>
+                <SelectItem value="Medicare">Medicare</SelectItem>
+                <SelectItem value="Islamic Finance Education">Islamic Finance Education</SelectItem>
+                <SelectItem value="Other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+            {/* Mirror Select value into a hidden input so Netlify captures it */}
+            <input type="hidden" name="topic" value={topic} />
+
+            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-2xl">
+              Submit
+            </Button>
+          </form>
+          <p className="text-xs text-gray-500 mt-3 text-center">
+            📌 Submissions are captured by <b>Netlify Forms</b> and you can enable email notifications to <b>shahwali.hotaki@ikhlasinsurance.com</b>. Data is not stored by this assistant.
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Footer Section */}
+      <div className="mt-6 text-center text-sm text-gray-600">
+        ✅ Licensed Broker (NPN 21422353) <br />
+        ✅ Ikhlas Insurance Group – <i>“Serving With Sincerity”</i> <br />
+        📞 708-274-4036 | 📧 shahwali.hotaki@ikhlasinsurance.com <br />
+        🔗 <a href="https://ikhlasinsurance.com/team/shahwali-hotaki/" target="_blank" className="text-blue-600 underline">Official Profile</a>
+      </div>
+    </div>
+  );
+}
